@@ -1,0 +1,17 @@
+{
+  "name": "crazy-dev-learn-code-platform",
+  "version": "1.0.0",
+  "description": "A fun and educational platform to learn JavaScript.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'Building the project'",
+    "test": "echo 'Running tests'"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "author": "Crazy Tech",
+  "license": "MIT"
+}

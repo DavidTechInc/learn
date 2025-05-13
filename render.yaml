@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: crazy-learn
+    env: node
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    region: oregon
+    plan: free
+    branches:
+      - main

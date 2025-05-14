@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,55 +9,71 @@
   <meta property="og:title" content="Crazy Learn — Code & Level Up" />
   <meta property="og:image" content="https://files.catbox.moe/wew36s.jpg" />
   <meta property="og:description" content="Gamified JavaScript learning with challenges, profile cards, and a live editor." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
 
   <!-- Header -->
-  <header class="header">
-    <div class="logo">Crazy Learn</div>
-    <div class="burger" id="burger">&#9776;</div>
-    <nav class="nav" id="nav">
-      <a href="/">Home</a>
-      <a href="/quiz">Quiz</a>
-      <a href="/learn">Code</a>
-      <a href="/start">Profile</a>
-      <a href="/leaderboard">Leaderboard</a>
-      <a href="/explore">Explore</a>
-      <a href="https://whatsapp.com/channel/0029VbANsvkIiRp31CEW3C2C" target="_blank">My Channel</a>
+  <header class="flex items-center justify-between p-4 bg-white shadow-md">
+    <div class="text-2xl font-bold text-blue-600">Crazy Learn</div>
+    <div class="md:hidden">
+      <button id="burger" class="text-3xl">&#9776;</button>
+    </div>
+    <nav id="nav" class="hidden md:flex space-x-4">
+      <a href="/" class="hover:text-blue-500 transition duration-300">Home</a>
+      <a href="/quiz" class="hover:text-blue-500 transition duration-300">Quiz</a>
+     <a href="/learn" class="hover:text-blue-500 transition duration-300">Code</a>
+      <a href="/start" class="hover:text-blue-500 transition duration-300">Profile</a>
+      <a href="/leaderboard" class="hover:text-blue-500 transition duration-300">Leaderboard</a>
+      <a href="/explore" class="hover:text-blue-500 transition duration-300">Explore</a>
+      <a href="https://whatsapp.com/channel/0029VbANsvkIiRp31CEW3C2C" target="_blank" class="hover:text-blue-500 transition duration-300">My Channel</a>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero" data-aos="fade-up">
-    <h1>Learn JavaScript While Having Fun!</h1>
-    <p>Challenge yourself, collect XP, earn badges and share your coder card.</p>
-    <a href="/start" class="start-btn">Start Learning</a>
+  <section class="text-center py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white" data-aos="fade-up">
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Learn JavaScript While Having Fun!</h1>
+    <p class="text-lg md:text-2xl mb-6">Challenge yourself, collect XP, earn badges and share your coder card.</p>
+    <a href="/start" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">Start Learning</a>
   </section>
 
   <!-- Features -->
-  <section class="features" data-aos="fade-up">
-    <div class="feature">
-      <h2>Interactive Quizzes</h2>
-      <p>From beginner to pro, test your JS skills daily.</p>
-    </div>
-    <div class="feature">
-      <h2>Code Editor</h2>
-      <p>Practice directly in your browser and get instant feedback.</p>
-    </div>
-    <div class="feature">
-      <h2>Gamified Learning</h2>
-      <p>Earn XP, level up, unlock badges and climb the leaderboard.</p>
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-gray-100 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+      <h2 class="text-2xl font-bold mb-2">Interactive Quizzes</h2>
+        <p>From beginner to pro, test your JS skills daily.</p>
+      </div>
+      <div class="bg-gray-100 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="text-2xl font-bold mb-2">Code Editor</h2>
+        <p>Practice directly in your browser and get instant feedback.</p>
+      </div>
+      <div class="bg-gray-100 p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+        <h2 class="text-2xl font-bold mb-2">Gamified Learning</h2>
+        <p>Earn XP, level up, unlock badges and climb the leaderboard.</p>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="text-center py-6 bg-gray-200">
     <p>© 2025 Crazy Learn by Crazy Tech</p>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="script.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
+
+    // Burger menu toggle
+    document.getElementById('burger').addEventListener('click', function() {
+      const nav = document.getElementById('nav');
+      nav.classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>

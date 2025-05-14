@@ -3,59 +3,266 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Crazy Learn — Quiz</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="description" content="Test your JavaScript knowledge with Crazy Learn." />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background: #1e1e2f;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .quiz-container {
+    max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 10px;
+      margin-bottom: 1rem;
+    }
+    .progress {
+      background: #76c7c0;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .quiz-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .quiz-body h2 {
+      margin-bottom: 1rem;
+    }
+    #options {
+      list-style: none;
+      padding: 0;
+    }
+    #options li {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    #options li:hover {
+      background: #f1f1f1;
+    }
+    .quiz-footer {
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .quiz-footer button {
+      background: #76c7c0;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .quiz-footer button:hover {
+      background: #5aa9a4;
+    }
+    .result-section {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
 
-  <!-- En-tête -->
-  <header class="flex items-center justify-between p-4 bg-white shadow-md">
-  <div class="text-2xl font-bold text-blue-600">Crazy Learn</div>
-    <nav class="hidden md:flex space-x-4">
-      <a href="/" class="hover:text-blue-500 transition duration-300">Accueil</a>
-      <a href="/quiz" class="text-blue-500 font-semibold">Quiz</a>
-      <a href="/learn" class="hover:text-blue-500 transition duration-300">Code</a>
-      <a href="/start" class="hover:text-blue-500 transition duration-300">Profil</a>
-      <a href="/leaderboard" class="hover:text-blue-500 transition duration-300">Classement</a>
-      <a href="/explore" class="hover:text-blue-500 transition duration-300">Explorer</a>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Crazy Learn</div>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/quiz">Quiz</a>
+      <a href="/learn">Code</a>
+      <a href="/start">Profile</a>
+      <a href="/leaderboard">Leaderboard</a>
+      <a href="/explore">Explore</a>
     </nav>
   </header>
 
-  <!-- Section Quiz -->
-  <section class="max-w-4xl mx-auto py-12 px-4" data-aos="fade-up">
-    <h1 class="text-3xl font-bold mb-6 text-center">Testez vos connaissances en JavaScript</h1>
-    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="100">
-      <p class="mb-4">Quelle est la sortie de ce code ?</p>
-      <pre class="bg-gray-100 p-4 rounded mb-4">console.log(typeof null);</pre>
-      <form>
-        <label class="block mb-2">
-          <input type="radio" name="answer" class="mr-2"> "null"
-        </label>
-        <label class="block mb-2">
-          <input type="radio" name="answer" class="mr-2"> "object"
-          </label>
-        <label class="block mb-2">
-          <input type="radio" name="answer" class="mr-2"> "undefined"
-        </label>
-        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Valider</button>
-      </form>
-    </div>
+  <!-- Quiz Section -->
+  <section class="quiz-section">
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+        <div class="quiz-info">
+          <span id="question-number">Question 1</span>
+          <span id="timer">Temps : 30s</span>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <h2 id="question">Chargement de la question...</h2>
+        <ul id="options">
+          <!-- Options insérées dynamiquement -->
+        </ul>
+      </div>
+      <div class="quiz-footer">
+        <button id="next-button">Suivant</button>
+      </div>
+      </div>
   </section>
 
-  <!-- Pied de page -->
-  <footer class="text-center py-6 bg-gray-200">
-    <p>© 2025 Crazy Learn by Crazy Tech</p>
-  </footer>
+  <!-- Result Section -->
+  <section class="result-section hidden" id="result-section">
+    <h2>Quiz terminé !</h2>
+    <p>Votre score : <span id="score"></span></p>
+    <button id="retry-button">Recommencer</button>
+    <button id="start-coding-button">Commencer à coder</button>
+  </section>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-    });
+    const questions = [
+      {
+        question: "Que signifie HTML ?",
+        options: ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyperlinking Text Mark Language"],
+        answer: 0
+      },
+      {
+        question: "Quelle propriété CSS contrôle la taille du texte ?",
+        options: ["font-style", "text-size", "font-size", "text-style"],
+        answer: 2
+      },
+      {
+        question: "Dans quel élément HTML plaçons-nous le JavaScript ?",
+        options: ["<js>", "<script>", "<javascript>", "<code>"],
+        answer: 1
+      },
+      {
+        question: "Quelle méthode JavaScript est utilisée pour écrire dans la console ?",
+        options: ["console.log()", "console.write()", "log.console()", "write.console()"],
+        answer: 0
+      },
+      {
+        question: "Quelle balise HTML est utilisée pour insérer une image ?",
+        options: ["<img>", "<image>", "<pic>", "<src>"],
+        answer: 0
+      }
+      // Ajoutez plus de questions ici
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let timer;
+    let timeLeft = 30;
+
+    const questionNumber = document.getElementById('question-number');
+    const timerDisplay = document.getElementById('timer');
+    const question
+    = document.getElementById('question');
+    const options = document.getElementById('options');
+    const progress = document.getElementById('progress');
+    const nextButton = document.getElementById('next-button');
+    const resultSection = document.getElementById('result-section');
+    const scoreDisplay = document.getElementById('score');
+    const retryButton = document.getElementById('retry-button');
+    const startCodingButton = document.getElementById('start-coding-button');
+
+    function showQuestion() {
+      clearInterval(timer);
+      timeLeft = 30;
+      startTimer();
+
+      const q = questions[currentQuestionIndex];
+      questionNumber.innerText = `Question currentQuestionIndex + 1 of{questions.length}`;
+      question.innerText = q.question;
+      options.innerHTML = '';
+      q.options.forEach((option, i) => {
+        const li = document.createElement('li');
+        li.innerText = option;
+        li.onclick = () => selectAnswer(i);
+        options.appendChild(li);
+      });
+      updateProgress();
+    }
+
+    function selectAnswer(index) {
+      const correct = questions[currentQuestionIndex].answer;
+      if (index === correct) {
+        score++;
+      }
+      nextButton.disabled = false;
+      document.querySelectorAll('#options li').forEach((li, i) => {
+        li.style.background = i === correct ? '#d4edda' : (i === index ? '#f8d7da' : '');
+      });
+      clearInterval(timer);
+    }
+
+    function updateProgress() {
+      const percentage = ((currentQuestionIndex) / questions.length) * 100;
+      progress.style.width = `percentage
+    
+
+    function startTimer() 
+      timerDisplay.innerText = `Temps :{timeLeft}s`;
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerText = `Temps : timeLefts`;
+        if (timeLeft === 0) 
+          clearInterval(timer);
+          nextButton.click();
+        , 1000);
+    
+
+    nextButton.onclick = () => 
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) 
+        showQuestion();
+       else 
+        document.querySelector('.quiz-section').classList.add('hidden');
+        resultSection.classList.remove('hidden');
+        scoreDisplay.innerText = `{score} / ${questions.length}`;
+      }
+    };
+
+    retryButton.onclick = () => location.reload();
+    startCodingButton.onclick = () => location.href = "/learn";
+
+    showQuestion();
   </script>
 </body>
 </html>

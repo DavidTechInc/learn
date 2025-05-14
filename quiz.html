@@ -1,210 +1,61 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Quiz | Crazy Learn</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Fira Code', monospace;
-      background: #0e0e0e;
-      color: #fff;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .quiz-container {
-      text-align: center;
-      width: 80%;
-      max-width: 600px;
-      padding: 2rem;
-      background: #1e1e1e;
-      border-radius: 16px;
-      box-shadow: 0 0 20px #00ffc3;
-    }
-
-    h2 {
-      color: #00ffc3;
-      margin-bottom: 1.5rem;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #333;
-      margin-bottom: 1rem;
-      border-radius: 4px;
-      position: relative;
-    }
-
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      background: #00ffc3;
-      width: 0;
-      border-radius: 4px;
-      transition: width 0.3s ease;
-    }
-
-    .question {
-      font-size: 1.2rem;
-      margin: 1rem 0;
-    }
-
-    .answer-btn {
-      background: #00ffc3;
-      color: black;
-      border: none;
-      padding: 1rem;
-      margin: 1rem 0;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.3s;
-    }
-
-    .answer-btn:hover {
-      background: #00d6aa;
-    }
-
-    .feedback {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      color: #f2f2f2;
-    }
-
-    .feedback.correct {
-      color: #28a745;
-    }
-
-    .feedback.incorrect {
-      color: #dc3545;
-    }
-
-    .result {
-      font-size: 1.2rem;
-      margin-top: 2rem;
-      color: #00ffc3;
-    }
-
-    button {
-      background: #00d6aa;
-      color: #000;
-      font-weight: bold;
-      padding: 1rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 1rem;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crazy Learn — Quiz</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
 
-  <div class="quiz-container">
-    <h2>JavaScript Quiz</h2>
-    
-    <div class="progress-bar">
-      <span id="progress"></span>
+  <!-- En-tête -->
+  <header class="flex items-center justify-between p-4 bg-white shadow-md">
+  <div class="text-2xl font-bold text-blue-600">Crazy Learn</div>
+    <nav class="hidden md:flex space-x-4">
+      <a href="/" class="hover:text-blue-500 transition duration-300">Accueil</a>
+      <a href="/quiz" class="text-blue-500 font-semibold">Quiz</a>
+      <a href="/learn" class="hover:text-blue-500 transition duration-300">Code</a>
+      <a href="/start" class="hover:text-blue-500 transition duration-300">Profil</a>
+      <a href="/leaderboard" class="hover:text-blue-500 transition duration-300">Classement</a>
+      <a href="/explore" class="hover:text-blue-500 transition duration-300">Explorer</a>
+    </nav>
+  </header>
+
+  <!-- Section Quiz -->
+  <section class="max-w-4xl mx-auto py-12 px-4" data-aos="fade-up">
+    <h1 class="text-3xl font-bold mb-6 text-center">Testez vos connaissances en JavaScript</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md" data-aos="zoom-in" data-aos-delay="100">
+      <p class="mb-4">Quelle est la sortie de ce code ?</p>
+      <pre class="bg-gray-100 p-4 rounded mb-4">console.log(typeof null);</pre>
+      <form>
+        <label class="block mb-2">
+          <input type="radio" name="answer" class="mr-2"> "null"
+        </label>
+        <label class="block mb-2">
+          <input type="radio" name="answer" class="mr-2"> "object"
+          </label>
+        <label class="block mb-2">
+          <input type="radio" name="answer" class="mr-2"> "undefined"
+        </label>
+        <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300">Valider</button>
+      </form>
     </div>
+  </section>
 
-    <div id="question-container">
-      <div class="question" id="question">Loading question...</div>
-      <button class="answer-btn" onclick="checkAnswer(0)" id="answer1">Loading...</button>
-      <button class="answer-btn" onclick="checkAnswer(1)" id="answer2">Loading...</button>
-      <button class="answer-btn" onclick="checkAnswer(2)" id="answer3">Loading...</button>
-      <button class="answer-btn" onclick="checkAnswer(3)" id="answer4">Loading...</button>
-    </div>
+  <!-- Pied de page -->
+  <footer class="text-center py-6 bg-gray-200">
+    <p>© 2025 Crazy Learn by Crazy Tech</p>
+  </footer>
 
-    <div class="feedback" id="feedback"></div>
-    <div class="result" id="result">Score: 0</div>
-
-    <button onclick="nextQuestion()" id="next-btn" style="display:none;">Next Question</button>
-  </div>
-
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // Simuler des questions d'un fichier JSON (dans la pratique, elles viendront d'un serveur ou fichier)
-    const questions = [
-      {
-        category: "Basic Syntax",
-        level: 1,
-        question: "What is the correct syntax to output 'Hello World' in JavaScript?",
-        options: ["echo 'Hello World';", "console.log('Hello World');", "print('Hello World');", "alert('Hello World');"],
-        answer: 1
-      },
-      {
-        category: "Basic Syntax",
-        level: 1,
-        question: "Which of the following is a valid variable declaration in JavaScript?",
-        options: ["let myVariable;", "variable 2variable;", "const = myVariable;", "variable: const;"],
-        answer: 0
-      },
-      // Questions supplémentaires...
-    ];
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let level = 1;
-    let answeredQuestions = 0;
-
-    // Charge la question en fonction du niveau de l'utilisateur
-    function loadQuestion() {
-      const user = JSON.parse(localStorage.getItem('crazydev_user'));
-      if (!user) {
-        alert("Please start the quiz by creating your profile.");
-        window.location.href = "/start";
-        return;
-      }
-
-      const userLevel = user.level || 1;  // Récupérer le niveau
-      const questionData = questions.filter(q => q.level === userLevel)[currentQuestionIndex];
-      document.getElementById('question').textContent = questionData.question;
-      document.getElementById('answer1').textContent = questionData.options[0];
-      document.getElementById('answer2').textContent = questionData.options[1];
-      document.getElementById('answer3').textContent = questionData.options[2];
-      document.getElementById('answer4').textContent = questionData.options[3];
-      document.getElementById('progress').style.width = (answeredQuestions / questions.length) * 100 + '%';
-    }
-
-    function checkAnswer(selectedIndex) {
-      const correctIndex = questions[currentQuestionIndex].answer;
-      const feedback = document.getElementById('feedback');
-
-      if (selectedIndex === correctIndex) {
-        feedback.textContent = 'Correct!';
-        feedback.className = 'feedback correct';
-        score += 10;
-        level = Math.floor(score / 50) + 1;
-      } else {
-        feedback.textContent = 'Incorrect!';
-        feedback.className = 'feedback incorrect';
-      }
-
-      answeredQuestions++;
-      document.getElementById('result').textContent = 'Score: ' + score + ' | Level: ' + level;
-      document.getElementById('next-btn').style.display = 'block';
-    }
-
-    function nextQuestion() {
-      if (currentQuestionIndex < questions.length - 1) {
-        currentQuestionIndex++;
-        loadQuestion();
-      } else {
-        document.getElementById('result').textContent = 'Quiz Finished! Final Score: ' + score;
-        document.getElementById('next-btn').style.display = 'none';
-      }
-    }
-
-    loadQuestion();
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+    });
   </script>
-
 </body>
 </html>
